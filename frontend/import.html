@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>历史笔录导入与回溯 · 智能问询笔录平台</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+<div id="app-header"></div>
+<main class="page">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title"><span class="bar"></span>历史笔录导入与要素回溯</h1>
+      <div class="page-sub">上传既有笔录（DOCX / TXT）或粘贴文本，自动解析问答对、归类章节、生成五流证据报告并转为继续问询草稿</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn" id="btn-back">← 返回台账</button>
+    </div>
+  </div>
+
+  <div class="import-layout">
+    <aside>
+      <div class="card">
+        <div class="card-head"><h3>① 导入来源</h3><span class="tag">问答结构解析</span></div>
+        <div class="card-body">
+          <div class="dropzone" id="dropzone">
+            <div style="font-size:24px;opacity:.45;margin-bottom:4px">⇪</div>
+            拖拽 DOCX / TXT 笔录文件到此处，或点击选择
+            <div class="tiny" style="margin-top:4px">文件内容不出网，仅在本机后端解析</div>
+          </div>
+          <input type="file" id="file-input" class="hidden" accept=".docx,.txt,.md">
+          <div class="flex justify-between items-center" style="margin:14px 0 6px">
+            <span class="small strong">或粘贴笔录文本</span>
+            <button class="btn-text btn-sm" id="btn-clear">清空</button>
+          </div>
+          <textarea class="textarea" id="raw-text" rows="9"
+            placeholder="支持「问：/答：」「Q:/A:」「问\\n答」等前缀格式。&#10;示例：&#10;问：我们是……民警，现依法向你询问，你听清楚了吗？&#10;答：听清楚了。"></textarea>
+          <button class="btn btn-primary btn-block mt-12" id="btn-parse">解 析 笔 录</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-head"><h3>② 预置历史笔录样例</h3><span class="small muted">虚构脱敏</span></div>
+        <div class="card-body" id="samples">
+          <div class="skeleton" style="height:90px"></div>
+        </div>
+      </div>
+    </aside>
+
+    <section id="result-area">
+      <div class="card">
+        <div class="card-head"><h3>③ 解析结果与五流回溯</h3><span class="small muted" id="result-meta">等待解析</span></div>
+        <div class="card-body" id="result-body">
+          <div class="empty-state" style="padding:70px 20px">
+            <div class="ico">⌕</div>
+            上传或粘贴历史笔录后，此处将展示问答对还原、章节归类、五流覆盖与重点缺口清单
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/nav.js"></script>
+<script src="/assets/js/pages/import.js"></script>
+</body>
+</html>

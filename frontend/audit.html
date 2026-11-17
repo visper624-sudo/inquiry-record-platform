@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>操作审计流水 · 智能问询笔录平台</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+<div id="app-header"></div>
+<main class="page">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title"><span class="bar"></span>操作审计流水</h1>
+      <div class="page-sub">案件访问、问答修改、AI 建议采纳、材料上传与文书导出全量留痕，哈希链防篡改校验</div>
+    </div>
+    <div class="page-actions">
+      <span class="tag" id="chain-badge">校验中…</span>
+    </div>
+  </div>
+
+  <div class="banner" id="chain-banner" style="margin-bottom:14px">
+    <span class="ico">i</span>
+    <div>每条审计记录通过 <code>prev_hash → hash</code> 形成链式摘要，任意一条被篡改都会导致链校验失败。</div>
+  </div>
+
+  <section class="card">
+    <div class="toolbar">
+      <select class="select" id="action" style="width:190px"><option value="">全部操作类型</option></select>
+      <div class="search-box"><input class="input" id="kw" placeholder="警号 / 对象编号 / 详情关键字"></div>
+      <button class="btn btn-primary btn-sm" id="btn-search" style="height:36px;padding:0 16px">查询</button>
+      <button class="btn btn-sm" id="btn-reset" style="height:36px">重置</button>
+      <span class="spacer"></span>
+      <span class="popover-hint" id="audit-summary"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+        <tr>
+          <th style="width:140px">操作时间</th>
+          <th style="width:140px">操作人</th>
+          <th style="width:130px">操作类型</th>
+          <th style="width:150px">对象</th>
+          <th>详情</th>
+          <th style="width:120px">来源 IP</th>
+          <th style="width:120px">哈希指纹</th>
+        </tr>
+        </thead>
+        <tbody id="rows">
+        <tr><td colspan="7"><div class="skeleton" style="height:180px"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination" id="pager"></div>
+  </section>
+</main>
+
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/nav.js"></script>
+<script src="/assets/js/pages/audit.js"></script>
+</body>
+</html>

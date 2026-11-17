@@ -1,0 +1,73 @@
+{
+  "template_id": "T16",
+  "code": "naked_chat_extortion",
+  "name": "裸聊敲诈勒索类",
+  "category": "裸聊敲诈",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子在交友软件、短视频平台以美女头像主动搭讪，引导受害人下载所谓直播或者聊天软件，借机获取通讯录和摄像头权限，随后发起视频裸聊并全程录制。之后以群发私密视频给通讯录好友相威胁，索要删视频费、封口费、保证金，受害人反复转账直至无力支付，对方仍不删除视频。",
+  "feature_signals": ["美女头像", "主动搭讪", "视频裸聊", "私密视频", "通讯录", "群发好友", "删除视频", "封口费", "获取权限", "下载聊天软件", "录屏", "威胁"],
+  "weight_keywords": ["裸聊", "视频", "通讯录", "封口费"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T16-S1-Q01", "text": "我们是公安机关反诈中心的民警，现就你报称被骗的情况向你了解经过，请你如实回答，听清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S1-Q02", "text": "依照法律规定，你有如实陈述的义务，故意隐瞒事实或者作虚假陈述要承担法律责任，你是否明白？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S1-Q03", "text": "询问结束后笔录会交你核对，如记录与你的陈述不符，可以当面提出补充和更正，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S1-Q04", "text": "本次询问将全程同步录音录像并严格保密，资料仅用于办案，你对此有无异议？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S1-Q05", "text": "请陈述你的姓名、身份证号码、户籍地址、现住址以及目前从事的职业：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T16-S2-Q01", "text": "对方是在哪个交友软件或者短视频平台添加你的？账号昵称和头像是什么？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T16-S2-Q02", "text": "你和对方是怎么认识的？是对方主动搭讪、附近的人还是评论区私信？", "flow": "personnel", "field": "acquaintance", "key_item": false},
+        {"qid": "T16-S2-Q03", "text": "对方自称叫什么名字、多大年龄、在哪里工作？有没有发过照片或语音？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T16-S2-Q04", "text": "对方有没有通过电话或者语音通话联系你？使用的是什么号码或者账号？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T16-S2-Q05", "text": "你们第一次聊天是什么时间？聊了多久之后就提到视频聊天？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T16-S2-Q06", "text": "你本人的手机号码是多少？通讯录里大概有多少个联系人？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T16-S3-Q01", "text": "对方让你下载了什么直播或者聊天软件？软件名称和图标是什么？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T16-S3-Q02", "text": "你是通过扫码还是点链接下载该软件的？二维码或者链接是谁发给你的？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T16-S3-Q03", "text": "对方发给你的软件下载网址或者推广页面是什么？完整域名是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T16-S3-Q04", "text": "安装该软件时它要求获取哪些权限？通讯录、相册和摄像头都授权了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S3-Q05", "text": "视频裸聊是在什么时间进行的？持续了多久、对方有没有露脸？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S3-Q06", "text": "对方第一次威胁你是什么时候？他是怎么说的、发了哪些截图给你？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S3-Q07", "text": "对方要求你下载什么软件查看通讯录？你操作时用的是什么型号的手机？", "flow": "network", "field": "login_ip", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T16-S4-Q01", "text": "你第一次按对方要求转账是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T16-S4-Q02", "text": "你一共被索要并转出多少钱？分了几笔、最大的一笔是多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T16-S4-Q03", "text": "转账是通过微信、支付宝还是手机银行完成的？有没有在柜面办理？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T16-S4-Q04", "text": "钱是从哪张银行卡转出的？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T16-S4-Q05", "text": "对方收款账户是哪家银行的？开户支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T16-S4-Q06", "text": "对方收款账户的卡号或者账号是多少？是否换过多个收款账户？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T16-S4-Q07", "text": "收款账户的开户人姓名是什么？对方是否说过这是公司或者他人账户？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T16-S4-Q08", "text": "你最终确认的损失总额是多少？转账之后对方是否删除了视频？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T16-S5-Q01", "text": "你和对方的聊天记录、威胁截图是否还保存？有没有被对方要求删除？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S5-Q02", "text": "对方发来的私密视频、通讯录截图能否提供？保存在哪里？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S5-Q03", "text": "你的转账凭证和银行卡流水是否已经保存？能否提供银行明细？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T16-S5-Q04", "text": "对方现在是否还在联系你？你是否已向公安机关报案并保留证据？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# 智能问询笔录平台 —— 运行依赖
+# 说明：后端仅使用 Python 标准库，唯一必需依赖为 python-docx（生成 DOCX 红头文书）。
+# 安装：pip install -r requirements.txt
+python-docx>=1.1.0
+
+# 可选：仅在需要重新生成演示材料截图（backend/seed.py 中 _draw_material）时安装
+# Pillow>=10.0.0

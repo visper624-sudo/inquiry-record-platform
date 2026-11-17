@@ -1,0 +1,587 @@
+{
+  "base": "http://127.0.0.1:8765",
+  "generated_at": "2026-11-17 10:34:36",
+  "total": 64,
+  "passed": 64,
+  "failed": 0,
+  "pass_rate": 100.0,
+  "avg_ms": 147.5,
+  "results": [
+    {
+      "name": "服务健康检查",
+      "method": "GET",
+      "path": "/api/health",
+      "status": 200,
+      "ok": true,
+      "ms": 18.4,
+      "note": ""
+    },
+    {
+      "name": "未登录访问接口应被拦截",
+      "method": "GET",
+      "path": "/api/records",
+      "status": 401,
+      "ok": true,
+      "ms": 1.1,
+      "note": ""
+    },
+    {
+      "name": "登录页静态资源",
+      "method": "GET",
+      "path": "/login.html",
+      "status": 200,
+      "ok": true,
+      "ms": 3.6,
+      "note": ""
+    },
+    {
+      "name": "静态资源目录穿越被拒绝",
+      "method": "GET",
+      "path": "/%2e%2e/backend/app.py",
+      "status": 403,
+      "ok": true,
+      "ms": 5.0,
+      "note": ""
+    },
+    {
+      "name": "办案民警登录",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200,
+      "ok": true,
+      "ms": 136.5,
+      "note": ""
+    },
+    {
+      "name": "获取当前登录用户",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "ok": true,
+      "ms": 15.5,
+      "note": ""
+    },
+    {
+      "name": "错误密码应拒绝",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 401,
+      "ok": true,
+      "ms": 184.9,
+      "note": ""
+    },
+    {
+      "name": "连续登录失败触发限流",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 429,
+      "ok": true,
+      "ms": 26.1,
+      "note": ""
+    },
+    {
+      "name": "研判员登录（只读角色）",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200,
+      "ok": true,
+      "ms": 178.0,
+      "note": ""
+    },
+    {
+      "name": "其他派出所民警登录（跨机构鉴权）",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200,
+      "ok": true,
+      "ms": 153.8,
+      "note": ""
+    },
+    {
+      "name": "管理员登录",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 200,
+      "ok": true,
+      "ms": 185.5,
+      "note": ""
+    },
+    {
+      "name": "笔录台账分页查询",
+      "method": "GET",
+      "path": "/api/records?page=1&page_size=5",
+      "status": 200,
+      "ok": true,
+      "ms": 26.7,
+      "note": ""
+    },
+    {
+      "name": "关键字检索",
+      "method": "GET",
+      "path": "/api/records?keyword=%E6%9D%8E%E8%8A%B3",
+      "status": 200,
+      "ok": true,
+      "ms": 31.9,
+      "note": ""
+    },
+    {
+      "name": "状态筛选（问询中）",
+      "method": "GET",
+      "path": "/api/records?status=inquiry",
+      "status": 200,
+      "ok": true,
+      "ms": 30.0,
+      "note": ""
+    },
+    {
+      "name": "统计大盘",
+      "method": "GET",
+      "path": "/api/stats/overview",
+      "status": 200,
+      "ok": true,
+      "ms": 23.9,
+      "note": ""
+    },
+    {
+      "name": "跨机构访问应被拒绝",
+      "method": "GET",
+      "path": "/api/records/RC202611160001",
+      "status": 403,
+      "ok": true,
+      "ms": 20.3,
+      "note": ""
+    },
+    {
+      "name": "研判员可查看工作台",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/workbench",
+      "status": 200,
+      "ok": true,
+      "ms": 30.1,
+      "note": ""
+    },
+    {
+      "name": "研判员修改问答应被拒绝",
+      "method": "PATCH",
+      "path": "/api/records/RC202611160001/qa/QAX",
+      "status": 403,
+      "ok": true,
+      "ms": 19.1,
+      "note": ""
+    },
+    {
+      "name": "非法案件编号被拒绝",
+      "method": "POST",
+      "path": "/api/records",
+      "status": 400,
+      "ok": true,
+      "ms": 30.0,
+      "note": ""
+    },
+    {
+      "name": "新增笔录（接报建档）",
+      "method": "POST",
+      "path": "/api/records",
+      "status": 200,
+      "ok": true,
+      "ms": 14.2,
+      "note": ""
+    },
+    {
+      "name": "外部系统案件检索（智研判/智案管 Mock）",
+      "method": "GET",
+      "path": "/api/mock/external/cases?keyword=%E6%9D%8E%E8%8A%B3",
+      "status": 200,
+      "ok": true,
+      "ms": 2.9,
+      "note": ""
+    },
+    {
+      "name": "一键同步外部案件回填",
+      "method": "POST",
+      "path": "/api/records/RCC110A10CF0/sync-external",
+      "status": 200,
+      "ok": true,
+      "ms": 36.5,
+      "note": ""
+    },
+    {
+      "name": "四阶段流转（intake→templates）",
+      "method": "POST",
+      "path": "/api/records/RCC110A10CF0/stage",
+      "status": 200,
+      "ok": true,
+      "ms": 23.6,
+      "note": ""
+    },
+    {
+      "name": "模板库检索",
+      "method": "GET",
+      "path": "/api/templates?keyword=%E6%8A%95%E8%B5%84",
+      "status": 200,
+      "ok": true,
+      "ms": 12.9,
+      "note": ""
+    },
+    {
+      "name": "AI 模板推荐（可解释打分）",
+      "method": "POST",
+      "path": "/api/templates/recommend",
+      "status": 200,
+      "ok": true,
+      "ms": 23.3,
+      "note": ""
+    },
+    {
+      "name": "选定模板并生成合并大纲",
+      "method": "POST",
+      "path": "/api/records/RCC110A10CF0/templates",
+      "status": 200,
+      "ok": true,
+      "ms": 26.7,
+      "note": ""
+    },
+    {
+      "name": "三栏工作台数据加载",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/workbench",
+      "status": 200,
+      "ok": true,
+      "ms": 19.2,
+      "note": ""
+    },
+    {
+      "name": "录入答复后五流实时更新（补录对方卡号）",
+      "method": "PATCH",
+      "path": "/api/records/RC202611160001/qa/QA48CB06CB051B",
+      "status": 200,
+      "ok": true,
+      "ms": 25.1,
+      "note": ""
+    },
+    {
+      "name": "补录户名后资金流变为已收集",
+      "method": "PATCH",
+      "path": "/api/records/RC202611160001/qa/QA687A50D3D4C1",
+      "status": 200,
+      "ok": true,
+      "ms": 19.7,
+      "note": ""
+    },
+    {
+      "name": "问答恢复原值",
+      "method": "PATCH",
+      "path": "/api/records/RC202611160001/qa/QA48CB06CB051B",
+      "status": 200,
+      "ok": true,
+      "ms": 18.6,
+      "note": ""
+    },
+    {
+      "name": "问答恢复原值",
+      "method": "PATCH",
+      "path": "/api/records/RC202611160001/qa/QA687A50D3D4C1",
+      "status": 200,
+      "ok": true,
+      "ms": 36.4,
+      "note": ""
+    },
+    {
+      "name": "新增问答（章节归类）",
+      "method": "POST",
+      "path": "/api/records/RC202611160001/qa",
+      "status": 200,
+      "ok": true,
+      "ms": 18.7,
+      "note": ""
+    },
+    {
+      "name": "AI 研判建议生成",
+      "method": "POST",
+      "path": "/api/records/RC202611160001/advice/refresh",
+      "status": 200,
+      "ok": true,
+      "ms": 22.4,
+      "note": ""
+    },
+    {
+      "name": "一键采纳 AI 推荐问题",
+      "method": "POST",
+      "path": "/api/records/RC202611160001/advice/ADE3336C4C52/adopt",
+      "status": 200,
+      "ok": true,
+      "ms": 45.5,
+      "note": ""
+    },
+    {
+      "name": "上传辅助材料",
+      "method": "POST",
+      "path": "/api/records/RC202611160001/materials",
+      "status": 200,
+      "ok": true,
+      "ms": 28.1,
+      "note": ""
+    },
+    {
+      "name": "删除自测材料（不影响正文问答）",
+      "method": "DELETE",
+      "path": "/api/records/RC202611160001/materials/MT713F463ECC",
+      "status": 200,
+      "ok": true,
+      "ms": 10.3,
+      "note": ""
+    },
+    {
+      "name": "获取材料列表",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/materials",
+      "status": 200,
+      "ok": true,
+      "ms": 25.3,
+      "note": ""
+    },
+    {
+      "name": "材料 MIME 伪造被忽略",
+      "method": "GET",
+      "path": "/api/materials/MT4AFB79F755/download",
+      "status": 200,
+      "ok": true,
+      "ms": 0,
+      "note": "Content-Type=image/png"
+    },
+    {
+      "name": "暂存断点（计时与滚动位置）",
+      "method": "POST",
+      "path": "/api/records/RC202611160001/save",
+      "status": 200,
+      "ok": true,
+      "ms": 9.2,
+      "note": ""
+    },
+    {
+      "name": "继续询问断点恢复（inquiry 阶段）",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/resume",
+      "status": 200,
+      "ok": true,
+      "ms": 19.4,
+      "note": ""
+    },
+    {
+      "name": "文书预览模型",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/document",
+      "status": 200,
+      "ok": true,
+      "ms": 34.5,
+      "note": ""
+    },
+    {
+      "name": "文书合规自检",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/document",
+      "status": 200,
+      "ok": true,
+      "ms": 40.3,
+      "note": ""
+    },
+    {
+      "name": "导出 DOCX 红头文书",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/document.docx",
+      "status": 200,
+      "ok": true,
+      "ms": 0,
+      "note": "41 KB, 文件签名 b'PK'，Content-Type=application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
+      "name": "载入历史笔录样例",
+      "method": "GET",
+      "path": "/api/import/samples",
+      "status": 200,
+      "ok": true,
+      "ms": 25.0,
+      "note": ""
+    },
+    {
+      "name": "解析历史笔录（问答对抽取 + 五流回溯）",
+      "method": "POST",
+      "path": "/api/import/parse",
+      "status": 200,
+      "ok": true,
+      "ms": 39.7,
+      "note": ""
+    },
+    {
+      "name": "历史笔录转存为新问询会话",
+      "method": "POST",
+      "path": "/api/import/commit",
+      "status": 200,
+      "ok": true,
+      "ms": 28.5,
+      "note": ""
+    },
+    {
+      "name": "导入任务越权转存被拒绝",
+      "method": "POST",
+      "path": "/api/import/commit",
+      "status": 403,
+      "ok": true,
+      "ms": 24.2,
+      "note": ""
+    },
+    {
+      "name": "导入任务列表按归属过滤",
+      "method": "GET",
+      "path": "/api/import/jobs",
+      "status": 200,
+      "ok": true,
+      "ms": 27.8,
+      "note": ""
+    },
+    {
+      "name": "完成问询并封存",
+      "method": "POST",
+      "path": "/api/records/RCC110A10CF0/complete",
+      "status": 400,
+      "ok": true,
+      "ms": 4.4,
+      "note": ""
+    },
+    {
+      "name": "操作审计流水查询",
+      "method": "GET",
+      "path": "/api/audit?page=1&page_size=10",
+      "status": 200,
+      "ok": true,
+      "ms": 28.7,
+      "note": ""
+    },
+    {
+      "name": "五流字段口径配置读取",
+      "method": "GET",
+      "path": "/api/settings/five-flow",
+      "status": 200,
+      "ok": true,
+      "ms": 5.4,
+      "note": ""
+    },
+    {
+      "name": "模板库维护列表",
+      "method": "GET",
+      "path": "/api/settings/templates",
+      "status": 200,
+      "ok": true,
+      "ms": 27.0,
+      "note": ""
+    },
+    {
+      "name": "系统信息",
+      "method": "GET",
+      "path": "/api/settings/system",
+      "status": 200,
+      "ok": true,
+      "ms": 15.6,
+      "note": ""
+    },
+    {
+      "name": "研判员无权访问审计以外管理接口",
+      "method": "GET",
+      "path": "/api/settings/llm",
+      "status": 200,
+      "ok": true,
+      "ms": 32.9,
+      "note": ""
+    },
+    {
+      "name": "大模型引擎状态",
+      "method": "GET",
+      "path": "/api/settings/llm",
+      "status": 200,
+      "ok": true,
+      "ms": 31.8,
+      "note": ""
+    },
+    {
+      "name": "大模型地址白名单拦截 SSRF",
+      "method": "PUT",
+      "path": "/api/settings/llm",
+      "status": 400,
+      "ok": true,
+      "ms": 28.0,
+      "note": "错误提示异常：DeepSeek 提供方只允许官方地址 https://api.deepseek.com"
+    },
+    {
+      "name": "自定义模型端点未授权被拒绝",
+      "method": "PUT",
+      "path": "/api/settings/llm",
+      "status": 400,
+      "ok": true,
+      "ms": 101.9,
+      "note": ""
+    },
+    {
+      "name": "大模型连通性测试（真实调用）",
+      "method": "POST",
+      "path": "/api/settings/llm/test",
+      "status": 200,
+      "ok": true,
+      "ms": 875.1,
+      "note": ""
+    },
+    {
+      "name": "大模型深度研判（真实调用）",
+      "method": "POST",
+      "path": "/api/records/RC202611160001/ai/analyze",
+      "status": 200,
+      "ok": true,
+      "ms": 3429.0,
+      "note": "引擎=llm 模型=deepseek-chat 耗时=3378ms tokens=1149 回退=False"
+    },
+    {
+      "name": "大模型研判结果校验（字段一致性与去重）",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/workbench",
+      "status": 200,
+      "ok": true,
+      "ms": 27.8,
+      "note": "同一缺口出现重复建议：{'fund.counterparty_card': 3}"
+    },
+    {
+      "name": "大模型流式研判（SSE 增量）",
+      "method": "POST",
+      "path": "/api/records/RC202611160001/ai/analyze/stream",
+      "status": 200,
+      "ok": true,
+      "ms": 3025.7,
+      "note": "事件 delta=331 thought=13 done=1 · tokens=1151"
+    },
+    {
+      "name": "流式研判回放缓存",
+      "method": "GET",
+      "path": "/api/records/RC202611160001/ai/last-stream",
+      "status": 200,
+      "ok": true,
+      "ms": 4.8,
+      "note": ""
+    },
+    {
+      "name": "退出登录",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "status": 200,
+      "ok": true,
+      "ms": 15.5,
+      "note": ""
+    },
+    {
+      "name": "退出后接口应返回未授权",
+      "method": "GET",
+      "path": "/api/records",
+      "status": 401,
+      "ok": true,
+      "ms": 5.2,
+      "note": ""
+    }
+  ]
+}

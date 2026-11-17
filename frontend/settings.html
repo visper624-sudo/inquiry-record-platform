@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系统配置 · 智能问询笔录平台</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+<div id="app-header"></div>
+<main class="page">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title"><span class="bar"></span>系统配置</h1>
+      <div class="page-sub">五流要素口径、19 类模板信号词、大模型参数与系统运行信息（仅系统管理员可修改）</div>
+    </div>
+    <div class="page-actions">
+      <span class="tag" id="perm-badge">—</span>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" data-tab="flow">五流要素口径</button>
+    <button class="tab-btn" data-tab="tpl">问询模板库</button>
+    <button class="tab-btn" data-tab="llm">AI 模型参数</button>
+    <button class="tab-btn" data-tab="system">系统信息</button>
+  </div>
+
+  <section class="tab-pane active" id="pane-flow">
+    <div class="banner" style="margin-bottom:14px">
+      <span class="ico">i</span>
+      <div>缺失必填要素即判「需补充」；缺失 <b>关键要素</b>（key_item）即判 <b>重点缺口</b>，并在中栏置顶生成追问。
+        判定规则来自本页配置，非写死在代码中。</div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <h3>五流必填要素配置</h3>
+        <div class="flex gap-8">
+          <button class="btn btn-sm" id="btn-reset-flow">恢复默认</button>
+          <button class="btn btn-sm btn-primary" id="btn-save-flow">保存口径</button>
+        </div>
+      </div>
+      <div class="card-body" id="flow-config">
+        <div class="skeleton" style="height:320px"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-pane" id="pane-tpl">
+    <div class="card">
+      <div class="card-head">
+        <h3>19 类电诈模板 + 通用模板</h3>
+        <span class="small muted" id="tpl-meta">加载中…</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data">
+          <thead><tr>
+            <th style="width:74px">编号</th><th style="width:210px">模板名称</th>
+            <th style="width:110px">分类</th><th style="width:70px">问题数</th>
+            <th>特征信号词</th><th style="width:96px">操作</th>
+          </tr></thead>
+          <tbody id="tpl-rows"><tr><td colspan="6"><div class="skeleton" style="height:200px"></div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-pane" id="pane-llm">
+    <div class="settings-grid">
+      <div class="card">
+        <div class="card-head"><h3>大模型接入参数</h3><span class="tag" id="llm-engine">—</span></div>
+        <div class="card-body">
+          <div class="field">
+            <label>推理提供方</label>
+            <select class="select" id="llm-provider">
+              <option value="deepseek">DeepSeek 开放平台（推荐）</option>
+              <option value="openai_compatible">OpenAI 兼容接口</option>
+              <option value="ollama">Ollama 本地模型</option>
+              <option value="rule_engine">仅规则引擎（离线）</option>
+            </select>
+            <div class="form-hint">DeepSeek / OpenAI 兼容接口需要密钥；Ollama 走本机 11434；规则引擎无需任何外部依赖。</div>
+          </div>
+          <div class="field">
+            <label>API 密钥</label>
+            <input class="input" id="llm-key" type="password" autocomplete="new-password"
+                   placeholder="留空表示不修改；填写后仅保存在用户目录，不回显、不入库">
+            <div class="form-hint" id="llm-key-state">密钥状态：加载中…</div>
+          </div>
+          <div class="form-grid two">
+            <div class="field"><label>模型名称</label><input class="input" id="llm-model" placeholder="deepseek-chat"></div>
+            <div class="field"><label>服务地址</label><input class="input" id="llm-base" placeholder="https://api.deepseek.com"></div>
+          </div>
+          <div class="form-grid three">
+            <div class="field"><label>温度</label><input class="input" id="llm-temp" type="number" step="0.1" min="0" max="1"></div>
+            <div class="field"><label>最大输出 token</label><input class="input" id="llm-maxtokens" type="number" min="64" max="4096"></div>
+            <div class="field"><label>超时（秒）</label><input class="input" id="llm-timeout" type="number" min="5" max="120"></div>
+          </div>
+          <div class="field">
+            <label>启用大模型增强</label>
+            <label class="check"><input type="checkbox" id="llm-enabled"> 开启后研判优先调用大模型，失败自动回退规则引擎</label>
+            <div class="form-hint">大模型输出将经过 JSON 结构校验、字段白名单与缺口一致性检查，非法内容会被丢弃。</div>
+          </div>
+          <div class="flex gap-8" style="flex-wrap:wrap">
+            <button class="btn btn-primary" id="btn-save-llm">保存参数</button>
+            <button class="btn" id="btn-test-llm">连通性测试（真实调用）</button>
+            <button class="btn btn-danger" id="btn-clear-key">清除密钥</button>
+          </div>
+          <div id="llm-result" class="mt-12"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>AI 能力边界与合规约束</h3></div>
+        <div class="card-body small muted" style="line-height:2">
+          1. 模板推荐：信号词命中率 60% + 语义相似度 25% + 手法关键词 15%，结果可在推荐卡「为什么推荐」中查看；<br>
+          2. 要素抽取：规则层负责手机号、卡号、金额、时间等结构化字段，语义字段由启发式规则兜底；<br>
+          3. 追问建议：按「资金流 &gt; 通信流 &gt; 网络流 &gt; 人员流 &gt; 寄递流」严重度排序；<br>
+          4. 大模型深度研判：一次性输出类型判定、侦查指引与追问，服务端校验 JSON 字段白名单、问句格式与缺口一致性，非法内容丢弃并回退规则引擎；<br>
+          5. <b>任何 AI 建议必须由民警人工点击「加入问询」才会写入正式问答</b>，系统不提供自动写入；<br>
+          6. 材料文件不参与文书组装，避免证据材料混入正文造成程序瑕疵。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab-pane" id="pane-system">
+    <div class="stat-grid" id="sys-cards" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat-card"><div class="stat-label">加载中</div><div class="stat-value skeleton" style="width:60px;height:28px">&nbsp;</div></div>
+    </div>
+    <div class="settings-grid">
+      <div class="card">
+        <div class="card-head"><h3>运行信息</h3><span class="tag" id="sys-version">—</span></div>
+        <div class="card-body" id="sys-info"><div class="skeleton" style="height:130px"></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>角色与权限</h3></div>
+        <div class="card-body" id="sys-roles"><div class="skeleton" style="height:130px"></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/nav.js"></script>
+<script src="/assets/js/pages/settings.js"></script>
+</body>
+</html>

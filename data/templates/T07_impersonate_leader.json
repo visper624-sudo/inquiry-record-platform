@@ -1,0 +1,73 @@
+{
+  "template_id": "T07",
+  "code": "impersonate_leader",
+  "name": "冒充领导熟人类",
+  "category": "冒充领导熟人",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子盗用或者仿冒单位领导、企业老板、亲友的头像和昵称添加好友，先以关心工作、询问近况建立信任，随后以正在开会不方便接电话、急需垫付货款、帮忙代转账、给客户送礼等为由，要求受害人先行转账。部分骗子还会发送伪造的转账截图，谎称已汇款但延迟到账，诱使受害人垫资后无法追回。",
+  "feature_signals": ["领导头像", "添加好友", "在开会", "不便接电话", "垫付货款", "代转账", "转账截图", "延迟到账", "急需用钱", "老同学", "嘘寒问暖", "帮忙走账"],
+  "weight_keywords": ["领导", "垫付", "转账", "货款"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T07-S1-Q01", "text": "我们是公安机关反诈中心的民警，现就你报称被骗的情况向你了解经过，请你如实回答，听清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S1-Q02", "text": "依照法律规定，你有如实陈述的义务，故意隐瞒事实或者作虚假陈述要承担法律责任，你是否明白？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S1-Q03", "text": "询问结束后笔录会交你核对，如记录与你的陈述不符，可以当面提出补充和更正，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S1-Q04", "text": "本次询问全程同步录音录像，录音录像资料仅用于办案并随案保存，你对此有无异议？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S1-Q05", "text": "请陈述你的姓名、身份证号码、户籍地址、现住址以及目前从事的职业：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T07-S2-Q01", "text": "对方是用哪个微信号或者QQ号添加你的？头像和昵称与你认识的那个人一致吗？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T07-S2-Q02", "text": "对方是怎么加到你好友的？是在单位群、家长群还是通过通讯录推荐？", "flow": "personnel", "field": "acquaintance", "key_item": false},
+        {"qid": "T07-S2-Q03", "text": "对方自称是你的哪位领导、老板或者熟人？报的名字和你认识的人是否一致？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T07-S2-Q04", "text": "对方有没有给你打过电话？如果不接电话，他是怎么解释的？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T07-S2-Q05", "text": "对方第一次联系你是什么时间？当时以什么理由和你搭话？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T07-S2-Q06", "text": "你本人的手机号码是多少？对方是否知道你的工作单位和职务？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T07-S3-Q01", "text": "对方以什么理由让你先转钱？说的是帮忙垫付货款、代转账还是送礼？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S3-Q02", "text": "对方发给你的收款链接、网银页面或者文件网址是什么？完整地址是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T07-S3-Q03", "text": "对方有没有发收款二维码让你扫码付款？二维码是通过什么方式发来的？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T07-S3-Q04", "text": "对方是否要求你下载指定软件或者进入视频会议？软件名称是什么？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T07-S3-Q05", "text": "对方有没有发给你一张转账截图，说已经把钱打给你但延迟到账？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S3-Q06", "text": "转账前你有没有打电话或者当面核实的领导本人？核实结果是什么？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S3-Q07", "text": "你操作转账用的是什么型号的手机？用的是哪家银行的手机银行？", "flow": "network", "field": "login_ip", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T07-S4-Q01", "text": "你第一次按对方要求转账是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T07-S4-Q02", "text": "你一共转了几笔、合计多少钱？单笔最大金额是多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T07-S4-Q03", "text": "资金是通过手机银行、网银还是柜台转出的？有没有使用公司账户付款？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T07-S4-Q04", "text": "钱是从哪张银行卡转出的？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T07-S4-Q05", "text": "对方收款账户属于哪家银行？开户支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T07-S4-Q06", "text": "对方提供的收款卡号或者账号是多少？转账回单上的完整号码是什么？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T07-S4-Q07", "text": "收款账户的开户人姓名是什么？这个名字和你认识的领导是否一致？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T07-S4-Q08", "text": "你最终确认的损失总额是多少？公司或者个人还有没有其他钱被转走？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T07-S5-Q01", "text": "你和对方的聊天记录、伪造的转账截图是否保存？保存在哪个手机里？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S5-Q02", "text": "对方发送截图时使用的是什么账号？该账号现在是否还能查到？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S5-Q03", "text": "涉案银行卡和公司账户的流水是否已经打印？能否提供银行盖章的明细？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T07-S5-Q04", "text": "你是否已经向领导本人和单位财务核实？是否已向公安机关报案？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}

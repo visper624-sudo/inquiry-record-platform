@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 · 智能问询笔录平台</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+<div class="login-page">
+  <section class="login-hero">
+    <div class="badge-line">
+      <span style="width:22px;height:1px;background:#c8a24a;display:inline-block"></span>
+      江城市公安局 · 反诈中心
+    </div>
+    <h1>让每一起电诈案件的问询<br><em>结构化</em>、<em>可追溯</em>、<em>可复核</em></h1>
+    <p class="lead">
+      以 19 类电信网络诈骗案由模板为骨架，三栏沉浸式工作台承载「正式问答编排、AI 侦查研判、五流证据缺口定位」，
+      实时抽取人员流、通信流、网络流、资金流、寄递流要素，一键生成符合公安红头文书规范的询问笔录。
+    </p>
+    <ul class="feature-list">
+      <li class="feature-item">
+        <div class="fi-ico">模</div>
+        <div><b>19 类电诈模板 + 通用模板智能推荐</b>
+          <span>信号词命中、语义相似度、手法关键词三因子可解释打分，多模板合并去重生成大纲</span></div>
+      </li>
+      <li class="feature-item">
+        <div class="fi-ico">流</div>
+        <div><b>五流证据闭环与重点缺口定位</b>
+          <span>资金流缺对方卡号、通信流缺涉案号码，按严重程度排序生成追问，一键采纳进入正文</span></div>
+      </li>
+      <li class="feature-item">
+        <div class="fi-ico">文</div>
+        <div><b>红头 DOCX 文书与合规自检</b>
+          <span>纪要式问答正文、未作答条目自动过滤、签名落款与页码，导出前完成 6 项合规校验</span></div>
+      </li>
+      <li class="feature-item">
+        <div class="fi-ico">续</div>
+        <div><b>四阶段断点精确恢复</b>
+          <span>接报、模板、问询、完成四阶段现场快照，退出后继续询问可原样恢复计时与滚动位置</span></div>
+      </li>
+    </ul>
+    <div class="foot">教学演示项目 · 全部案件、人员与账户信息均为虚构脱敏数据 · v1.0.0</div>
+  </section>
+
+  <section class="login-panel">
+    <div class="login-card">
+      <h2>警号登录</h2>
+      <p class="sub">请使用分配的警号与密码登录，系统将按所属机构展示可管辖的笔录数据</p>
+      <form id="login-form" autocomplete="off">
+        <div class="field">
+          <label for="badge">警号</label>
+          <input class="input" id="badge" name="badge_no" placeholder="例如 100101" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="password">登录密码</label>
+          <input class="input" id="password" name="password" type="password" placeholder="请输入密码"
+                 autocomplete="current-password" required>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" id="btn-login" type="submit">登 录</button>
+        <div class="login-error" id="login-error"></div>
+      </form>
+      <div class="login-accounts">
+        <div class="title">演示账号（点击自动填充，密码均为 123456）</div>
+        <div class="account-row" data-badge="100101">
+          <span class="role">办案民警 · 张伟</span><span class="badge">100101</span>
+        </div>
+        <div class="account-row" data-badge="100201">
+          <span class="role">反诈研判员 · 王海涛</span><span class="badge">100201</span>
+        </div>
+        <div class="account-row" data-badge="100103">
+          <span class="role">望湖路派出所民警 · 赵磊</span><span class="badge">100103</span>
+        </div>
+        <div class="account-row" data-badge="100001">
+          <span class="role">系统管理员 · 陈立国</span><span class="badge">100001</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/pages/login.js"></script>
+</body>
+</html>

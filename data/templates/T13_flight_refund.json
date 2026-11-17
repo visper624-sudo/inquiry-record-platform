@@ -1,0 +1,73 @@
+{
+  "template_id": "T13",
+  "code": "flight_refund",
+  "name": "机票退改签类",
+  "category": "机票退改签",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子通过电话或者短信冒充航空公司、订票平台客服，能准确报出受害人的姓名、航班号和起降时间，称航班取消、延误或者超售需要办理改签并退赔。随后诱导受害人点击短信链接填写银行卡信息，或以误操作多打款需要退回、缴纳改签费保证金为由要求转账，并常要求开启屏幕共享或下载会议软件，最终转走账户资金。",
+  "feature_signals": ["航班取消", "航班延误", "机票改签", "退票赔偿", "航空客服", "航班号", "误操作多打款", "改签费", "补偿金", "短信链接", "屏幕共享", "验证码"],
+  "weight_keywords": ["航班", "改签", "退票", "客服"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T13-S1-Q01", "text": "我们是公安机关反诈中心的民警，现就你报称被骗的情况向你了解经过，请你如实回答，听清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S1-Q02", "text": "依照法律规定，你有如实陈述的义务，故意隐瞒事实或者作虚假陈述要承担法律责任，你是否明白？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S1-Q03", "text": "询问结束后笔录会交你核对，如记录与你的陈述不符，可以当面提出补充和更正，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S1-Q04", "text": "本次询问全程同步录音录像，录音录像资料仅用于办案并随案保存，你对此有无异议？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S1-Q05", "text": "请陈述你的姓名、身份证号码、户籍地址、现住址以及目前从事的职业：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T13-S2-Q01", "text": "对方是打电话还是发短信给你？来电号码或者短信发送号码是多少？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T13-S2-Q02", "text": "对方第一次联系你是什么时间？离你的航班起飞还有多久？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T13-S2-Q03", "text": "对方自称是哪家航空公司或者订票平台的客服？工号和姓名是什么？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T13-S2-Q04", "text": "对方能不能准确说出你的姓名、航班号和起降时间？都说对了哪些信息？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S2-Q05", "text": "你收到的航班取消或者延误短信内容是什么？里面有没有链接或者电话？", "flow": "communication", "field": "sms_content", "key_item": false},
+        {"qid": "T13-S2-Q06", "text": "你本人的手机号码是多少？购买机票时预留的是哪个号码？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T13-S3-Q01", "text": "对方让你点击短信链接还是扫二维码办理退改签？链接指向什么页面？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T13-S3-Q02", "text": "对方要求你下载什么会议软件或者APP？名称、图标是什么？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T13-S3-Q03", "text": "你是否扫码进入了所谓的退改签平台或者客服页面？二维码从哪来的？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T13-S3-Q04", "text": "对方有没有让你开启屏幕共享，查看你的手机银行或者支付页面？", "flow": "network", "field": "screen_share", "key_item": false},
+        {"qid": "T13-S3-Q05", "text": "对方说退赔多少钱？让你在页面上填写了哪些银行卡信息？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S3-Q06", "text": "对方说误操作多打款给你、要你退回，具体是怎么说的？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S3-Q07", "text": "对方有没有让你加QQ号或者微信号办理退款？账号和昵称是什么？", "flow": "network", "field": "chat_account", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T13-S4-Q01", "text": "你第一次转出资金是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T13-S4-Q02", "text": "你一共转了几笔、合计多少钱？最大的一笔是多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T13-S4-Q03", "text": "资金是通过手机银行、微信还是支付宝转出的？有没有扫码支付？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T13-S4-Q04", "text": "钱是从哪张银行卡转出的？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T13-S4-Q05", "text": "对方收款账户属于哪家银行？开户支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T13-S4-Q06", "text": "对方收款账户的卡号或者账号是多少？与对方自称的航空公司账户一致吗？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T13-S4-Q07", "text": "收款账户的开户人姓名是什么？是个人账户还是公司账户？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T13-S4-Q08", "text": "你最终确认的损失总额是多少？对方承诺的退赔款有没有到账？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T13-S5-Q01", "text": "航班变动短信、退改签页面截图是否保存？能否提供给我们？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S5-Q02", "text": "你和对方的通话记录、会议软件通话记录能否调取？时长是多少？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S5-Q03", "text": "涉案银行卡的流水是否已经打印？能否提供银行盖章的交易明细？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T13-S5-Q04", "text": "你是否已在官方购票渠道核实并申请退票？是否已向公安机关报案？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}

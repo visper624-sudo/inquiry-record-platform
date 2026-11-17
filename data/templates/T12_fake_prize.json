@@ -1,0 +1,73 @@
+{
+  "template_id": "T12",
+  "code": "fake_prize",
+  "name": "虚假中奖类",
+  "category": "虚假中奖",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子通过短信、电话、抽奖小程序或者快递包裹内的中奖卡片，通知受害人是幸运用户，奖品为手机、现金红包或者大额优惠券。随后以领奖需要先缴纳个人所得税、手续费、邮费，或者需要核验账户、填写银行卡信息为由继续索要款项，部分以苹果手机换购名义诱导转账，最终不兑奖并失联。",
+  "feature_signals": ["中奖", "幸运用户", "抽奖", "领奖", "个人所得税", "手续费", "邮费", "兑奖", "奖品", "兑换码", "短信通知", "苹果手机"],
+  "weight_keywords": ["中奖", "领奖", "手续费", "兑奖"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T12-S1-Q01", "text": "我们是辖区派出所和反诈中心的民警，现就你遭受电信网络诈骗的情况进行询问，请如实回答，听明白了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S1-Q02", "text": "请你如实陈述被骗的整个经过，不得隐瞒、夸大或者编造事实，否则要承担法律责任，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S1-Q03", "text": "如你在询问中需要补充或者更正前面的陈述，可以随时提出，你听明白了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S1-Q04", "text": "本次询问会全程录音录像并制作笔录，录音录像资料随案保存，你是否同意？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S1-Q05", "text": "请说明你的姓名、身份证号码、户籍地址、现住址以及工作单位：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T12-S2-Q01", "text": "你是通过短信、电话还是小程序收到中奖通知的？短信内容和发送号码是什么？", "flow": "communication", "field": "sms_content", "key_item": false},
+        {"qid": "T12-S2-Q02", "text": "对方有没有给你打电话？来电号码是什么，是本地号码还是境外号码？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T12-S2-Q03", "text": "你第一次收到中奖消息是什么时间？当时是在什么场合看到的？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T12-S2-Q04", "text": "对方自称是哪家电视台、电商平台或者活动主办方？姓名和工号是什么？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T12-S2-Q05", "text": "对方让你添加了哪个微信号或者QQ号办理领奖？账号和昵称是什么？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T12-S2-Q06", "text": "你本人的手机号码是多少？中奖登记的是不是这个号码？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T12-S3-Q01", "text": "对方让你通过什么方式领奖？是点短信链接、扫二维码还是下载软件？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T12-S3-Q02", "text": "领奖页面或者平台网址是什么？页面上显示的主办方名称是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T12-S3-Q03", "text": "对方要求你下载什么领奖软件或者小程序APP？名称和图标是什么？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T12-S3-Q04", "text": "对方说你的奖品是什么、价值多少？有没有让你填写身份证和银行卡信息？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S3-Q05", "text": "对方以什么名义让你先交钱？个人所得税、手续费还是邮费？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S3-Q06", "text": "你交钱之后对方又说要交什么费用？奖品最后有没有兑现？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S3-Q07", "text": "你在手机上操作领奖页面时用的是什么型号的手机？页面有无异常？", "flow": "network", "field": "login_ip", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T12-S4-Q01", "text": "你第一次按对方要求付款是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T12-S4-Q02", "text": "你一共付了几笔、合计多少钱？税费、手续费分别是多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T12-S4-Q03", "text": "付款是通过微信、支付宝还是手机银行转账的？有没有扫码支付？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T12-S4-Q04", "text": "付款用的是哪张银行卡或者哪个支付账户？卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T12-S4-Q05", "text": "对方收款账户是哪家银行的？开户支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T12-S4-Q06", "text": "对方收款账户的卡号或者账号是多少？收款方显示的名称是什么？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T12-S4-Q07", "text": "收款账户的开户人姓名是什么？和对方自称的主办方是否一致？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T12-S4-Q08", "text": "你最终确认的损失总额是多少？是否收到任何奖品或者退款？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T12-S5-Q01", "text": "中奖短信、领奖页面和聊天记录是否保存？能否截图提供给我们？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S5-Q02", "text": "对方说奖品是通过快递寄出的吗？快递单号和寄件人信息是什么？", "flow": "delivery", "field": "express_no", "key_item": true},
+        {"qid": "T12-S5-Q03", "text": "你的转账凭证和银行卡流水是否已经保存？能否提供银行明细？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T12-S5-Q04", "text": "你是否向活动主办方官方渠道核实过？是否已向公安机关报案？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}

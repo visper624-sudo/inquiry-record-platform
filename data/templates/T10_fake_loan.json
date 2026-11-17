@@ -1,0 +1,73 @@
+{
+  "template_id": "T10",
+  "code": "fake_loan",
+  "name": "虚假网络贷款类",
+  "category": "虚假贷款",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子在短视频、短信、贷款群发布无抵押、秒到账、低利息的贷款广告，诱导受害人下载仿冒贷款软件，填写身份信息和银行卡号后，以银行卡号填写错误导致账户冻结、需要缴纳保证金、刷流水验证还款能力为由，要求受害人先转账，甚至要求开启屏幕共享获取验证码，最终不放款并拉黑受害人。",
+  "feature_signals": ["无抵押", "秒到账", "低利息", "贷款APP", "卡号错误", "账户冻结", "保证金", "刷流水", "包装费", "验证码", "放款失败", "注销贷款"],
+  "weight_keywords": ["贷款", "保证金", "刷流水", "放款"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T10-S1-Q01", "text": "我们是公安机关反诈中心的民警，现就你报称被骗的情况向你了解经过，请你如实回答，听清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S1-Q02", "text": "依照法律规定，你有如实陈述的义务，故意隐瞒事实或者作虚假陈述要承担法律责任，你是否明白？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S1-Q03", "text": "询问结束后笔录会交你核对，如记录与你的陈述不符，可以当面提出补充和更正，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S1-Q04", "text": "本次询问全程同步录音录像，录音录像资料仅用于办案并随案保存，你对此有无异议？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S1-Q05", "text": "请陈述你的姓名、身份证号码、户籍地址、现住址以及目前从事的职业：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T10-S2-Q01", "text": "你是在哪个平台看到贷款广告的？广告链接、短信或者对方账号是什么？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T10-S2-Q02", "text": "对方自称是哪家金融公司、银行或者贷款平台的客服经理？姓名和工号是什么？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T10-S2-Q03", "text": "你第一次和对方联系是什么时间？是主动咨询还是对方打来电话？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T10-S2-Q04", "text": "对方使用的电话号码是多少？是否为400开头、境外号码或者网络电话？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T10-S2-Q05", "text": "你本人的手机号码是多少？贷款申请时填写的是哪个号码？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T10-S3-Q01", "text": "对方让你通过什么方式下载贷款软件？是短信链接、扫码还是应用商店搜索？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T10-S3-Q02", "text": "你下载的贷款软件叫什么名称？图标和正规银行APP是否相似？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T10-S3-Q03", "text": "对方发给你的贷款平台网址是什么？登录页面上显示的公司名称是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T10-S3-Q04", "text": "对方是否要求你开启屏幕共享或者远程协助，由他指导你填写资料？", "flow": "network", "field": "screen_share", "key_item": false},
+        {"qid": "T10-S3-Q05", "text": "你在该平台填写了哪些个人信息？身份证号、银行卡号和密码都填了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S3-Q06", "text": "对方说你的银行卡号填错、账户被冻结是什么时候？要求你怎么解冻？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S3-Q07", "text": "所谓刷流水、验证还款能力具体怎么操作？钱最后打到哪个账户？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S3-Q08", "text": "你操作贷款软件时使用的是什么型号的手机？页面有没有风险提示？", "flow": "network", "field": "login_ip", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T10-S4-Q01", "text": "你第一次向对方转账是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T10-S4-Q02", "text": "你一共转了几笔、合计多少钱？保证金、解冻费分别交了多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T10-S4-Q03", "text": "转账是通过手机银行、微信还是支付宝完成的？有没有在柜台办理？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T10-S4-Q04", "text": "钱是从哪张银行卡转出的？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T10-S4-Q05", "text": "对方收款账户属于哪家银行？开户支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T10-S4-Q06", "text": "对方收款账户的卡号是多少？平台显示的收款账号和实际卡号一致吗？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T10-S4-Q07", "text": "收款账户的开户人姓名是什么？对方如何解释这是个人账户？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T10-S4-Q08", "text": "你最终确认的损失总额是多少？贷款是否一分钱都没有到账？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T10-S5-Q01", "text": "对方发来的贷款短信、验证码短信是否保留？发送号码和内容是什么？", "flow": "communication", "field": "sms_content", "key_item": false},
+        {"qid": "T10-S5-Q02", "text": "贷款软件的额度页面、冻结提示和聊天记录能否截图提供？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S5-Q03", "text": "涉案银行卡的交易流水是否已经打印？能否提供银行盖章的明细？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T10-S5-Q04", "text": "你是否向正规银行咨询过贷款？是否已向公安机关报案并申请止付？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}

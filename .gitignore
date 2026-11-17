@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Runtime data (created automatically on first start)
+storage/app.db
+storage/app.db-*
+storage/test.db
+storage/logs/
+storage/exports/
+
+# Test and temporary artifacts
+tests/*_report.html
+*.log
+*.bak
+.env
+
+# OS files
+.DS_Store
+Thumbs.db

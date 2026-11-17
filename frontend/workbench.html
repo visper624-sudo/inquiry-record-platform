@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三栏沉浸式问询工作台 · 智能问询笔录平台</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body class="wb-body">
+<div id="app-header"></div>
+
+<div class="wb-top">
+  <div class="wb-case">
+    <div class="no" id="wb-case-no">加载中…</div>
+    <div class="meta" id="wb-case-meta">—</div>
+  </div>
+  <span class="pill pill-blue" id="wb-stage">问询中</span>
+  <div class="wb-progress">
+    <div class="progress"><i id="wb-progress-bar" style="width:0%"></i></div>
+    <span class="txt" id="wb-progress-text">0 / 0 已答</span>
+  </div>
+  <div class="wb-timer" id="wb-timer">00:00</div>
+  <div class="wb-actions">
+    <button class="btn btn-sm" id="btn-material">材料抽屉 <span class="tag" id="mat-count">0</span></button>
+    <button class="btn btn-sm" id="btn-preview">文书预览</button>
+    <button class="btn btn-sm" id="btn-save">暂时保存</button>
+    <button class="btn btn-sm" id="btn-complete">完成问询</button>
+    <button class="btn btn-sm btn-primary" id="btn-export">导出笔录</button>
+  </div>
+</div>
+
+<div class="wb-grid">
+  <section class="wb-col">
+    <div class="wb-col-head"><span class="idx">1</span>正式问答编排<span class="hint">结构化成文 · 来源可溯</span></div>
+    <div class="wb-scroll" id="col-left">
+      <div class="skeleton" style="height:420px"></div>
+    </div>
+  </section>
+  <section class="wb-col">
+    <div class="wb-col-head"><span class="idx">2</span>AI 侦查研判<span class="hint">建议须人工采纳</span></div>
+    <div class="wb-scroll" id="col-mid">
+      <div class="skeleton" style="height:300px"></div>
+    </div>
+  </section>
+  <section class="wb-col">
+    <div class="wb-col-head"><span class="idx">3</span>五流证据闭环<span class="hint">实时抽取 · 缺口定位</span></div>
+    <div class="wb-scroll" id="col-right">
+      <div class="skeleton" style="height:300px"></div>
+    </div>
+  </section>
+</div>
+
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/nav.js"></script>
+<script src="/assets/js/pages/workbench.js"></script>
+</body>
+</html>

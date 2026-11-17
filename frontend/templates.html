@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>问询模板智能匹配 · 智能问询笔录平台</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+<div id="app-header"></div>
+<main class="page">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title"><span class="bar"></span>问询模板智能匹配</h1>
+      <div class="page-sub">基于案情文本的信号词命中、语义相似度与手法关键词三因子加权，推荐结果可解释、可复核</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn" id="btn-back">← 返回台账</button>
+    </div>
+  </div>
+
+  <div class="tpl-layout">
+    <aside>
+      <div class="card card-pad case-summary" id="case-summary">
+        <div class="skeleton" style="height:220px"></div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <div class="card-head"><h3>已选模板</h3><span class="small muted" id="sel-hint">0 个</span></div>
+        <div class="card-body" id="selected-list">
+          <div class="small muted">尚未选择模板</div>
+        </div>
+      </div>
+      <div class="banner" style="margin-top:14px">
+        <span class="ico">i</span>
+        <div>多模板合并时按「固定开头 / 接触引流 / 被骗经过 / 资金损失 / 证据补充」章节归并，重复问题自动去重，并保留来源模板标记。</div>
+      </div>
+    </aside>
+
+    <section>
+      <div class="card">
+        <div class="card-head">
+          <h3><span class="badge-ai">AI</span>&nbsp;智能推荐模板</h3>
+          <span class="small muted" id="reco-meta">基于案情文本实时计算</span>
+        </div>
+        <div class="card-body">
+          <div class="reco-grid" id="reco-grid">
+            <div class="skeleton" style="height:110px"></div>
+            <div class="skeleton" style="height:110px"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-head">
+          <h3>全量模板库</h3>
+          <div class="flex gap-8">
+            <input class="input input-sm" id="tpl-kw" placeholder="检索模板名称 / 信号词" style="width:180px">
+            <select class="select input-sm" id="tpl-cat" style="width:140px">
+              <option value="">全部分类</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="tpl-grid" id="tpl-grid">
+            <div class="skeleton" style="height:120px"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="selection-bar">
+        <span class="small muted nowrap">已选 <b id="sel-count" style="color:var(--navy-700)">0</b> 个模板</span>
+        <div class="chips" id="sel-chips"><span class="tiny muted">点击上方推荐卡或模板库卡片进行选择</span></div>
+        <button class="btn btn-primary" id="btn-start" disabled>确认模板并开始问询 →</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/nav.js"></script>
+<script src="/assets/js/pages/templates.js"></script>
+</body>
+</html>

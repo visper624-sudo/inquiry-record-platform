@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>笔录管理与统计大盘 · 智能问询笔录平台</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+<div id="app-header"></div>
+<main class="page">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title"><span class="bar"></span>笔录管理与统计大盘</h1>
+      <div class="page-sub" id="page-sub">按案件编号、案情、报案人检索；点击「继续询问」自适应恢复断点阶段</div>
+    </div>
+    <div class="page-actions">
+      <button class="btn" id="btn-import">导入历史笔录</button>
+      <button class="btn btn-primary" id="btn-new">＋ 新增笔录</button>
+    </div>
+  </div>
+
+  <div class="stat-grid" id="stat-grid">
+    <div class="stat-card"><div class="stat-label">笔录总数</div><div class="stat-value skeleton" style="width:80px;height:30px">&nbsp;</div></div>
+    <div class="stat-card"><div class="stat-label">问询中</div><div class="stat-value skeleton" style="width:60px;height:30px">&nbsp;</div></div>
+    <div class="stat-card"><div class="stat-label">已问询</div><div class="stat-value skeleton" style="width:60px;height:30px">&nbsp;</div></div>
+    <div class="stat-card"><div class="stat-label">重点缺口案件</div><div class="stat-value skeleton" style="width:60px;height:30px">&nbsp;</div></div>
+    <div class="stat-card"><div class="stat-label">平均问询时长</div><div class="stat-value skeleton" style="width:80px;height:30px">&nbsp;</div></div>
+  </div>
+
+  <section class="card">
+    <div class="toolbar">
+      <div class="search-box">
+        <input class="input" id="kw" placeholder="案件编号 / 案情 / 报案人 / 类别">
+      </div>
+      <select class="select" id="status" style="width:130px">
+        <option value="">全部状态</option>
+        <option value="pending">未问询</option>
+        <option value="inquiry">问询中</option>
+        <option value="completed">已问询</option>
+      </select>
+      <select class="select" id="category" style="width:180px">
+        <option value="">全部案件类别</option>
+      </select>
+      <button class="btn btn-primary btn-sm" id="btn-search" style="height:36px;padding:0 16px">查询</button>
+      <button class="btn btn-sm" id="btn-reset" style="height:36px">重置</button>
+      <span class="spacer"></span>
+      <span class="popover-hint" id="list-summary"></span>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+        <tr>
+          <th style="width:132px">案件编号</th>
+          <th style="width:148px">案件类别</th>
+          <th>简要案情</th>
+          <th style="width:88px">报案人</th>
+          <th style="width:150px">办案民警</th>
+          <th style="width:96px">问询状态</th>
+          <th style="width:132px">最近更新</th>
+          <th style="width:168px">操作</th>
+        </tr>
+        </thead>
+        <tbody id="rows">
+        <tr><td colspan="8"><div class="skeleton" style="height:160px"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination" id="pager"></div>
+  </section>
+</main>
+
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/nav.js"></script>
+<script src="/assets/js/pages/ledger.js"></script>
+</body>
+</html>

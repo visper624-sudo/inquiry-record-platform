@@ -1,0 +1,76 @@
+{
+  "template_id": "T00",
+  "code": "general",
+  "name": "通用询问模板",
+  "category": "综合兜底",
+  "is_general": true,
+  "version": "1.0",
+  "description": "本模板为兜底通用询问模板，适用于案由尚不明确、多种手法交织或新出现的电信网络诈骗警情。询问围绕受害人与嫌疑人接触渠道、话术诱饵、操作过程、资金流转与证据留存展开，覆盖人员、通信、网络、资金、寄递五流全部必填要素，可用于首次接报询问和跨案由要素补录。",
+  "feature_signals": ["陌生来电", "添加好友", "下载APP", "屏幕共享", "转账", "充值", "验证码", "保证金", "对方自称", "提现失败"],
+  "weight_keywords": ["陌生来电", "添加好友", "下载APP", "转账"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T00-S1-Q01", "text": "我们是公安机关反诈中心的民警，现就你报称被骗的情况向你进行询问，请你如实回答，你听清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T00-S1-Q02", "text": "依照法律规定，你有如实陈述的义务，故意隐瞒事实或者作虚假陈述要承担法律责任，你是否明白？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T00-S1-Q03", "text": "询问结束后笔录会交你核对，如记录与你的陈述不符，你可以当面提出补充和更正，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T00-S1-Q04", "text": "本次询问将全程同步录音录像，录音录像资料仅用于办案并随案保存，你对此有无异议？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T00-S1-Q05", "text": "请陈述你的姓名、身份证号码、户籍地址、现住址和目前从事的职业：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T00-S2-Q01", "text": "对方第一次联系你是哪一天、几点钟？当时你正在做什么？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T00-S2-Q02", "text": "对方是通过什么方式联系你的？请说明来电号码、短信发送号码或在哪个平台添加你？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T00-S2-Q03", "text": "对方在电话或聊天里自称什么身份？他报出的单位名称、姓名和工号分别是什么？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T00-S2-Q04", "text": "对方用哪个账号和你保持联系？微信号、QQ号、抖音号及对方昵称分别是什么？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T00-S2-Q05", "text": "你本人的手机号码是多少？案发期间是否还使用过其他号码与对方联系？", "flow": "personnel", "field": "victim_contact", "key_item": false},
+        {"qid": "T00-S2-Q06", "text": "对方是否把你拉进群聊或者介绍其他人对接？拉你进群的人是谁、群名称是什么？", "flow": "personnel", "field": "agent_person", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T00-S3-Q01", "text": "对方让你通过什么渠道下载软件或打开平台？是扫码、群内链接还是应用市场搜索？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T00-S3-Q02", "text": "你安装的涉案软件叫什么名称？图标和界面有什么特征，现在是否还在手机上？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T00-S3-Q03", "text": "对方发给你的网址或平台域名是什么？屏幕上显示的完整地址是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T00-S3-Q04", "text": "对方是否要求你开启屏幕共享或远程协助？用的是哪款软件、什么时间开启的？", "flow": "network", "field": "screen_share", "key_item": false},
+        {"qid": "T00-S3-Q05", "text": "本案是否涉及快递包裹？如涉及，快递公司名称和运单号是什么？", "flow": "delivery", "field": "express_no", "key_item": true},
+        {"qid": "T00-S3-Q06", "text": "该包裹的寄件人是谁？寄件人姓名、电话和寄出地址分别是什么？", "flow": "delivery", "field": "sender_name", "key_item": false},
+        {"qid": "T00-S3-Q07", "text": "包裹的收件人姓名和联系电话是什么？收件人是否为你本人？", "flow": "delivery", "field": "receiver_name", "key_item": false},
+        {"qid": "T00-S3-Q08", "text": "包裹的收件地址具体在哪里？是否写到街道门牌号或快递代收点？", "flow": "delivery", "field": "address", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T00-S4-Q01", "text": "你第一次向对方转账是什么时间？日期和具体时刻分别是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T00-S4-Q02", "text": "你一共向对方转出多少钱？单笔最大金额和累计金额分别是多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T00-S4-Q03", "text": "你是通过什么通道转出资金的？是手机银行、微信、支付宝还是柜面转账？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T00-S4-Q04", "text": "你转出资金用的是哪张银行卡？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T00-S4-Q05", "text": "对方收款账户的开户银行是哪一家？具体的支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T00-S4-Q06", "text": "对方收款账户的卡号或账号是多少？转账记录上显示的完整号码是什么？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T00-S4-Q07", "text": "对方收款账户的开户人姓名是什么？转账页面显示的姓名和对方自称是否一致？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T00-S4-Q08", "text": "你最终确认的被骗损失总额是多少？是否包含仍留在平台账户里的余额？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T00-S5-Q01", "text": "你与对方的聊天记录、转账截图是否还保存在手机里？存在哪个位置、是否删除过？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T00-S5-Q02", "text": "对方发来的短信或验证码短信是否还保留？短信内容和发送号码是什么？", "flow": "communication", "field": "sms_content", "key_item": false},
+        {"qid": "T00-S5-Q03", "text": "你是否已到银行打印涉案银行卡流水？能否把流水原件提供给我们？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T00-S5-Q04", "text": "你操作转账时用的是什么品牌型号的手机？这台设备现在是否还在你手中？", "flow": "network", "field": "login_ip", "key_item": false},
+        {"qid": "T00-S5-Q05", "text": "除你之外，是否还有其他人被同一对象诈骗？你是否已向其他公安机关报案？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T00-S5-Q06", "text": "你能否提供每笔转账的银行流水号或者支付订单号？在转账记录里能查到吗？", "flow": "fund", "field": "serial_no", "key_item": false}
+      ]
+    }
+  ]
+}

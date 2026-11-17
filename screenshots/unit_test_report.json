@@ -1,0 +1,264 @@
+{
+  "total": 32,
+  "passed": 32,
+  "failed": 0,
+  "duration_sec": 0.61,
+  "records": [
+    {
+      "name": "TestDocument.test_doc_model_filters_empty_answers",
+      "module": "TestDocument",
+      "doc": "",
+      "status": "pass",
+      "ms": 11.3,
+      "message": ""
+    },
+    {
+      "name": "TestDocument.test_render_docx_and_reopen",
+      "module": "TestDocument",
+      "doc": "",
+      "status": "pass",
+      "ms": 81.8,
+      "message": ""
+    },
+    {
+      "name": "TestFiveFlow.test_extract_card_and_mask",
+      "module": "TestFiveFlow",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.2,
+      "message": ""
+    },
+    {
+      "name": "TestFiveFlow.test_flow_inference_from_question",
+      "module": "TestFiveFlow",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.0,
+      "message": ""
+    },
+    {
+      "name": "TestFiveFlow.test_full_fund_collection",
+      "module": "TestFiveFlow",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.4,
+      "message": ""
+    },
+    {
+      "name": "TestFiveFlow.test_gap_priority_order",
+      "module": "TestFiveFlow",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestFiveFlow.test_key_gap_when_missing_counterparty",
+      "module": "TestFiveFlow",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestFiveFlow.test_not_involved_requires_manual",
+      "module": "TestFiveFlow",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestHardening.test_audit_chain_concurrent",
+      "module": "TestHardening",
+      "doc": "",
+      "status": "pass",
+      "ms": 96.1,
+      "message": ""
+    },
+    {
+      "name": "TestHardening.test_base_url_validation",
+      "module": "TestHardening",
+      "doc": "",
+      "status": "pass",
+      "ms": 14.6,
+      "message": ""
+    },
+    {
+      "name": "TestHardening.test_client_ip_trusted_proxy",
+      "module": "TestHardening",
+      "doc": "",
+      "status": "pass",
+      "ms": 45.5,
+      "message": ""
+    },
+    {
+      "name": "TestHardening.test_login_failure_lockout",
+      "module": "TestHardening",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.0,
+      "message": ""
+    },
+    {
+      "name": "TestHardening.test_password_policy",
+      "module": "TestHardening",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.0,
+      "message": ""
+    },
+    {
+      "name": "TestHardening.test_regex_validation",
+      "module": "TestHardening",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestImporter.test_classify_sections",
+      "module": "TestImporter",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.4,
+      "message": ""
+    },
+    {
+      "name": "TestImporter.test_parse_history_sample",
+      "module": "TestImporter",
+      "doc": "",
+      "status": "pass",
+      "ms": 1.7,
+      "message": ""
+    },
+    {
+      "name": "TestLLM.test_extract_json_handles_code_fence",
+      "module": "TestLLM",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestLLM.test_fallback_analysis_shape",
+      "module": "TestLLM",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.3,
+      "message": ""
+    },
+    {
+      "name": "TestLLM.test_normalize_filters_unknown_fields",
+      "module": "TestLLM",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestLLM.test_normalize_question_punctuation",
+      "module": "TestLLM",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestLLM.test_partial_thoughts_extraction",
+      "module": "TestLLM",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.0,
+      "message": ""
+    },
+    {
+      "name": "TestSecurity.test_org_scope",
+      "module": "TestSecurity",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestSecurity.test_password_hash_roundtrip",
+      "module": "TestSecurity",
+      "doc": "",
+      "status": "pass",
+      "ms": 85.1,
+      "message": ""
+    },
+    {
+      "name": "TestSeedData.test_audit_chain",
+      "module": "TestSeedData",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestSeedData.test_completed_record_is_complete",
+      "module": "TestSeedData",
+      "doc": "",
+      "status": "pass",
+      "ms": 1.7,
+      "message": ""
+    },
+    {
+      "name": "TestSeedData.test_main_record_has_key_gap",
+      "module": "TestSeedData",
+      "doc": "",
+      "status": "pass",
+      "ms": 1.2,
+      "message": ""
+    },
+    {
+      "name": "TestTemplates.test_catalog_complete",
+      "module": "TestTemplates",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.0,
+      "message": ""
+    },
+    {
+      "name": "TestTemplates.test_merge_outline",
+      "module": "TestTemplates",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestTemplates.test_recommend_brushing",
+      "module": "TestTemplates",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.7,
+      "message": ""
+    },
+    {
+      "name": "TestTemplates.test_recommend_investment",
+      "module": "TestTemplates",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.5,
+      "message": ""
+    },
+    {
+      "name": "TestTemplates.test_required_fields_covered_by_general_template",
+      "module": "TestTemplates",
+      "doc": "",
+      "status": "pass",
+      "ms": 0.1,
+      "message": ""
+    },
+    {
+      "name": "TestTemplates.test_validator_passes",
+      "module": "TestTemplates",
+      "doc": "",
+      "status": "pass",
+      "ms": 2.7,
+      "message": ""
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "template_id": "T05",
+  "code": "brushing_rebate",
+  "name": "刷单返利类",
+  "category": "刷单返利",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子在短视频、兼职群、招聘网站发布足不出户日赚百元的刷单兼职广告，先让受害人做点赞、关注等小额任务并快速返现，取得信任后以连单任务、任务超时、操作失误需要补单为由，要求受害人向指定账户垫付大额本金，或者诱导下载仿冒接单软件充值刷单，最终不再返现并将受害人拉黑。",
+  "feature_signals": ["刷单", "兼职", "日赚百元", "点赞任务", "垫付", "连单", "补单", "任务超时", "返现", "接单APP", "保证金", "解冻"],
+  "weight_keywords": ["刷单", "垫付", "返利", "任务"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T05-S1-Q01", "text": "我们是本市公安机关反诈中心的民警，今天就你被骗一事向你询问，请配合并如实陈述，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S1-Q02", "text": "在询问之前告知你，如实提供情况是你的法定义务，隐瞒或者编造事实要承担相应法律责任，你是否听明白？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S1-Q03", "text": "你在接受询问过程中可以随时补充、更正自己的陈述，也有权核对笔录，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S1-Q04", "text": "为固定你的陈述，本次询问全程同步录音录像，录音录像随案保存，你对此有无异议？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S1-Q05", "text": "请说明你的姓名、身份证号码、户籍地址、现住址和职业情况：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T05-S2-Q01", "text": "你最早是在哪个平台看到刷单兼职广告的？广告内容和发布者账号是什么？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T05-S2-Q02", "text": "发布广告或者拉你进任务群的人自称什么身份？是派单员、接待员还是导师？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T05-S2-Q03", "text": "你第一次接触对方是什么时间？是通过私信、群消息还是电话联系的？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T05-S2-Q04", "text": "对方有没有给你打过电话或者发过语音？来电号码和通话时长是什么？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T05-S2-Q05", "text": "你本人的手机号码是多少？案发期间是否用其他号码注册过任务平台？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T05-S3-Q01", "text": "对方让你通过什么方式下载接单软件？是扫码、点群里的链接还是应用市场搜索？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T05-S3-Q02", "text": "你下载的接单或者刷单软件叫什么名称？打开后显示哪些任务栏目？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T05-S3-Q03", "text": "对方发给你的任务平台网址是什么？浏览器地址栏显示的完整域名是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T05-S3-Q04", "text": "群里负责派单、结算的人分别叫什么？有没有让你单独加所谓导师或者财务？", "flow": "personnel", "field": "agent_person", "key_item": false},
+        {"qid": "T05-S3-Q05", "text": "你最初做的任务是什么内容？点赞、关注还是垫付小额货款？佣金怎么算的？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S3-Q06", "text": "对方从什么时候开始让你做连单、大额单？补单和任务超时是怎么解释的？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S3-Q07", "text": "对方是否要求你开启屏幕共享或者在会议软件里操作？具体是怎么操作的？", "flow": "network", "field": "screen_share", "key_item": false},
+        {"qid": "T05-S3-Q08", "text": "你操作任务时使用的是什么型号的手机？平台登录页面有无异常提示？", "flow": "network", "field": "login_ip", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T05-S4-Q01", "text": "你第一笔垫付转账是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T05-S4-Q02", "text": "你一共垫付了多少笔、累计多少钱？最大的一笔是多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T05-S4-Q03", "text": "你是通过手机银行、微信还是支付宝付款的？有没有用云闪付或者扫码支付？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T05-S4-Q04", "text": "垫付的钱是从哪张银行卡转出的？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T05-S4-Q05", "text": "对方收款账户是哪家银行的？开户支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T05-S4-Q06", "text": "对方收款账户的卡号是多少？平台显示的收款账号和实际卡号是否一致？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T05-S4-Q07", "text": "收款账户的开户人姓名是什么？对方解释过为什么用个人账户收款吗？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T05-S4-Q08", "text": "你实际损失总额是多少？前期返利拿回了多少、净损失多少？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T05-S5-Q01", "text": "任务群聊、派单消息和对方的聊天记录是否还在？保存在哪里？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S5-Q02", "text": "任务截图、返利到账记录和平台余额页面能否截图提供？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S5-Q03", "text": "涉案银行卡的流水是否已经打印？能否提供银行盖章的交易明细？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T05-S5-Q04", "text": "你是否知道还有其他人在同一个任务群里被骗？是否已向其他公安机关报案？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}

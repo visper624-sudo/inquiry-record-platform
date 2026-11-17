@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>笔录文书预览与导出 · 智能问询笔录平台</title>
+  <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+<div id="app-header"></div>
+
+<div class="doc-toolbar" id="doc-toolbar">
+  <button class="btn btn-sm" id="btn-back">← 返回工作台</button>
+  <button class="btn btn-sm" id="btn-ledger">笔录台账</button>
+  <span class="spacer" style="flex:1"></span>
+  <span class="small muted" id="doc-summary">正在生成文书…</span>
+  <button class="btn btn-sm" id="btn-print">打印预览</button>
+  <button class="btn btn-sm btn-primary" id="btn-export">下载 DOCX 文书</button>
+</div>
+
+<div class="doc-layout">
+  <div id="paper-host">
+    <div class="paper"><div class="skeleton" style="height:640px"></div></div>
+  </div>
+  <aside>
+    <div class="card">
+      <div class="card-head"><h3>文印规范</h3><span class="tag">公安红头</span></div>
+      <div class="card-body small muted" style="line-height:1.9">
+        A4 纸张，上 3.7cm / 下 3.5cm / 左 2.8cm / 右 2.6cm；<br>
+        红头二号红色加粗居中；正文仿宋_GB2312 三号、固定行距 30 磅；<br>
+        「问：」加粗、「答：」常规，首行缩进 2 字符；<br>
+        未作答条目自动过滤，落款含签名区与页码。
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="card-head">
+        <h3>文书合规自检</h3>
+        <span class="tag" id="check-badge">—</span>
+      </div>
+      <div id="checks"><div class="skeleton" style="height:180px;margin:12px"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="card-head"><h3>导出说明</h3></div>
+      <div class="card-body small muted" style="line-height:1.9">
+        导出的 DOCX 与左侧预览使用<b>同一份文书数据模型</b>，保证所见即所得。
+        文书内已自动加入演示数据水印说明，正式办案使用前需去除演示标识。
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/nav.js"></script>
+<script src="/assets/js/pages/document.js"></script>
+</body>
+</html>

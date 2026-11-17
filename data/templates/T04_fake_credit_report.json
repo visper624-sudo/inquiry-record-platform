@@ -1,0 +1,73 @@
+{
+  "template_id": "T04",
+  "code": "fake_credit_report",
+  "name": "虚假征信类",
+  "category": "虚假征信",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子冒充银行、征信中心或者网贷平台客服，称受害人名下有不良征信记录、在校期间注册的校园贷账户未注销，或者误开通的金融服务会影响买房贷款和就业，必须配合清零额度、注销账户。随后诱导受害人在多个网贷平台借款转入所谓安全账户验资，或开启屏幕共享读取验证码，从而转走资金。",
+  "feature_signals": ["征信", "不良记录", "注销账户", "校园贷", "清零额度", "安全账户", "资金核查", "屏幕共享", "影响贷款", "客服工号", "征信报告", "验证码"],
+  "weight_keywords": ["征信", "注销账户", "安全账户", "屏幕共享"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T04-S1-Q01", "text": "我们是公安机关反诈中心的民警，现就你报称被骗的情况向你了解经过，请你如实回答，听清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T04-S1-Q02", "text": "依照法律规定，你有如实陈述的义务，故意隐瞒事实或者作虚假陈述要承担法律责任，你是否明白？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T04-S1-Q03", "text": "询问结束后笔录会交你核对，如记录与你的陈述不符，可以当面提出补充和更正，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T04-S1-Q04", "text": "本次询问全程同步录音录像，录音录像资料仅用于办案并随案保存，你对此有无异议？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T04-S1-Q05", "text": "请陈述你的姓名、身份证号码、户籍地址、现住址以及目前从事的职业：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T04-S2-Q01", "text": "你是哪一天接到对方电话的？通话发生在上午还是下午，持续了多长时间？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T04-S2-Q02", "text": "对方来电显示的是什么号码？号码有没有被标记为银行或者客服电话？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T04-S2-Q03", "text": "对方自称是哪家银行、征信中心或者哪个网贷平台的客服？工号和姓名是什么？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T04-S2-Q04", "text": "对方让你通过哪个微信号、QQ号或者会议软件与所谓专员继续联系？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T04-S2-Q05", "text": "你本人的手机号码是多少？案发期间是否还接到过其他自称客服的电话？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T04-S3-Q01", "text": "对方通过什么方式让你查询征信或者下载软件？是发链接、扫码还是应用商店搜索？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T04-S3-Q02", "text": "对方指定你安装的软件叫什么名称？是会议软件、查询工具还是贷款平台？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T04-S3-Q03", "text": "对方发给你的所谓征信查询网址是什么？页面显示的单位名称和网址是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T04-S3-Q04", "text": "对方是否要求你打开屏幕共享或者远程协助？用的是哪款软件、什么时候开启的？", "flow": "network", "field": "screen_share", "key_item": false},
+        {"qid": "T04-S3-Q05", "text": "对方是不是把电话转接给所谓金融注销专员、银行风控人员？他们怎么称呼？", "flow": "personnel", "field": "agent_person", "key_item": false},
+        {"qid": "T04-S3-Q06", "text": "对方让你在哪些平台借款？借款金额、放款时间以及钱到账后怎么处理的？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T04-S3-Q07", "text": "对方有没有索要你的短信验证码、银行卡密码或者人脸识别？具体怎么操作的？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T04-S3-Q08", "text": "操作时你使用的是什么型号的手机？登录对方发来的页面有没有异常提示？", "flow": "network", "field": "login_ip", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T04-S4-Q01", "text": "你第一笔钱转出去是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T04-S4-Q02", "text": "你一共转了几笔、合计多少钱？最大的一笔金额是多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T04-S4-Q03", "text": "转账是通过手机银行、微信还是支付宝完成的？有没有在银行柜台办理？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T04-S4-Q04", "text": "钱是从哪张银行卡转出去的？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T04-S4-Q05", "text": "所谓安全账户的开户银行是哪一家？支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T04-S4-Q06", "text": "对方提供的收款账号或者卡号是多少？与对方自称的单位账户是否一致？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T04-S4-Q07", "text": "收款账户的开户人姓名是什么？是个人还是公司？对方怎么解释这个户名？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T04-S4-Q08", "text": "你核算后的损失总额是多少？是否包含网贷平台已经放款的钱？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T04-S5-Q01", "text": "对方发来的征信异常短信或者验证码短信是否保留？内容和号码是什么？", "flow": "communication", "field": "sms_content", "key_item": false},
+        {"qid": "T04-S5-Q02", "text": "你在网贷平台的借款合同、放款记录能否截图提供？借款是否已经到账？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T04-S5-Q03", "text": "涉案银行卡的流水是否已经打印？能否提供银行盖章的交易明细？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T04-S5-Q04", "text": "你是否向银行或者征信中心官方渠道核实过？是否已向当地派出所报案？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}

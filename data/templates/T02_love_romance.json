@@ -1,0 +1,73 @@
+{
+  "template_id": "T02",
+  "code": "love_romance",
+  "name": "网络婚恋交友类",
+  "category": "婚恋交友",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子在婚恋网站、交友软件或短视频平台伪装成优质单身人士，以恋爱结婚为名长期嘘寒问暖培养感情，随后透露所谓内部投资渠道、博彩系统漏洞或稳赚不赔的赚钱门路，诱导受害人在虚假平台注册充值。前期小额投入可返利提现，待受害人加大投入后便以操作失误、账户冻结、缴纳税费为由拒绝提现，最终拉黑失联。",
+  "feature_signals": ["婚恋网站", "交友软件", "网恋", "确立恋爱关系", "内部渠道", "稳赚不赔", "博彩漏洞", "平台充值", "无法提现", "见面结婚", "海外高管", "拉黑失联"],
+  "weight_keywords": ["网恋", "投资平台", "充值", "提现"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T02-S1-Q01", "text": "我们是本市公安机关反诈中心的民警，今天就你被骗一事向你询问，请配合并如实陈述，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T02-S1-Q02", "text": "在询问之前告知你，如实提供情况是你的法定义务，隐瞒或者编造事实要承担相应法律责任，你是否听明白？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T02-S1-Q03", "text": "你在接受询问过程中可以随时补充、更正自己的陈述，也有权核对笔录，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T02-S1-Q04", "text": "为固定你的陈述，本次询问全程同步录音录像，录音录像随案保存，你对此有无异议？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T02-S1-Q05", "text": "请说明你的姓名、身份证号码、户籍地址、现住址和职业情况：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T02-S2-Q01", "text": "你和对方是通过哪个婚恋网站、交友软件或者短视频平台认识的？认识时间是什么时候？", "flow": "personnel", "field": "acquaintance", "key_item": false},
+        {"qid": "T02-S2-Q02", "text": "对方在那个平台使用的昵称和账号是什么？后来是否转到微信或QQ继续联系？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T02-S2-Q03", "text": "对方自称叫什么名字、从事什么职业？说过自己的年龄、籍贯和家庭情况吗？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T02-S2-Q04", "text": "你们有没有通过电话或者视频通话联系？对方使用的手机号码是什么？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T02-S2-Q05", "text": "你们第一次通话或者第一次视频是在什么时候？当时聊了多长时间？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T02-S2-Q06", "text": "你本人的手机号码是多少？案发期间有没有更换过联系方式？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T02-S3-Q01", "text": "对方平时怎么和你培养感情？有没有提过结婚、见面或者共同生活的计划？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T02-S3-Q02", "text": "对方让你通过什么方式下载投资平台？是扫码、点链接还是直接发安装包给你？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T02-S3-Q03", "text": "你下载的平台软件叫什么名称？界面显示的是股票、外汇还是博彩类型？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T02-S3-Q04", "text": "对方发给你的平台网址是什么？你登录时浏览器地址栏显示的完整地址是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T02-S3-Q05", "text": "对方用什么理由让你相信能赚钱？说过内部消息、系统漏洞或者稳赚不赔吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T02-S3-Q06", "text": "对方有没有开屏幕共享或者远程控制你的手机，指导你注册和充值？", "flow": "network", "field": "screen_share", "key_item": false},
+        {"qid": "T02-S3-Q07", "text": "你登录该平台使用的是什么型号的手机？页面有没有显示过登录地址？", "flow": "network", "field": "login_ip", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T02-S4-Q01", "text": "你第一次在该平台充值转账是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T02-S4-Q02", "text": "你一共充值转账了多少笔、累计多少钱？单笔最大的一笔是多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T02-S4-Q03", "text": "充值时你是通过手机银行、微信还是支付宝付款的？有没有在柜台办理？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T02-S4-Q04", "text": "资金是从哪张银行卡转出的？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T02-S4-Q05", "text": "收款账户是哪家银行的？开户支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T02-S4-Q06", "text": "对方收款账户的卡号是多少？平台显示的充值收款账号和卡号一致吗？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T02-S4-Q07", "text": "收款账户的开户人姓名是什么？是不是平台客服或者所谓财务的个人账户？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T02-S4-Q08", "text": "你最后统计的被骗总额是多少？平台账户里还有没有没提现的余额？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T02-S5-Q01", "text": "你和对方的聊天记录、语音通话是否完整保留？保存在手机的什么位置？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T02-S5-Q02", "text": "对方发给你的照片、证件图片或者工作证是否保存？能否提供给我们？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T02-S5-Q03", "text": "平台充值的订单号和交易记录截图是否保存？能否和你的转账记录逐笔对应？", "flow": "fund", "field": "serial_no", "key_item": false},
+        {"qid": "T02-S5-Q04", "text": "提现失败时页面显示什么提示？你是否截图保存，事后有没有联系平台客服？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}

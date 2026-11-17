@@ -1,0 +1,73 @@
+{
+  "template_id": "T18",
+  "code": "campus_loan",
+  "name": "校园贷/培训贷类",
+  "category": "校园培训贷",
+  "is_general": false,
+  "version": "1.0",
+  "description": "骗子针对在校学生，冒充网贷平台客服称其学生信息被注册贷款账户、不注销会影响征信，诱导学生在多个借款平台贷款后转入所谓清零账户；或者以招聘兼职、培训包就业为名，诱骗学生签订分期贷款合同，办理培训贷、美容贷。学生尚未就业便背负债务，机构关门跑路。",
+  "feature_signals": ["校园贷", "注销账户", "学生信息", "培训贷", "分期贷款", "包就业", "征信", "兼职招聘", "借款平台", "清零额度", "就业协议", "学费分期"],
+  "weight_keywords": ["校园贷", "注销", "贷款", "征信"],
+  "sections": [
+    {
+      "key": "opening",
+      "title": "固定开头",
+      "questions": [
+        {"qid": "T18-S1-Q01", "text": "我们是辖区派出所和反诈中心的民警，现就你遭受电信网络诈骗的情况进行询问，请如实回答，听明白了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S1-Q02", "text": "请你如实陈述被骗的整个经过，不得隐瞒、夸大或者编造事实，否则要承担法律责任，你清楚了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S1-Q03", "text": "如你在询问中需要补充或者更正前面的陈述，可以随时提出，你听明白了吗？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S1-Q04", "text": "本次询问会全程录音录像并制作笔录，录音录像资料随案保存，你是否同意？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S1-Q05", "text": "请说明你的姓名、身份证号码、户籍地址、现住址以及就读学校：", "flow": "personnel", "field": "victim_identity", "key_item": true}
+      ]
+    },
+    {
+      "key": "contact",
+      "title": "接触引流",
+      "questions": [
+        {"qid": "T18-S2-Q01", "text": "对方是打电话还是通过招聘平台联系你的？对方使用的号码是什么？", "flow": "communication", "field": "call_number", "key_item": true},
+        {"qid": "T18-S2-Q02", "text": "你第一次接到对方电话是什么时间？当时对方是怎么介绍自己的？", "flow": "communication", "field": "call_time", "key_item": false},
+        {"qid": "T18-S2-Q03", "text": "对方自称是网贷平台客服、招聘专员还是培训机构老师？姓名和公司是什么？", "flow": "personnel", "field": "suspect_claim_identity", "key_item": true},
+        {"qid": "T18-S2-Q04", "text": "对方让你添加了哪个微信号、QQ号或者招聘平台账号？昵称是什么？", "flow": "network", "field": "chat_account", "key_item": false},
+        {"qid": "T18-S2-Q05", "text": "你本人的手机号码是多少？借款平台注册的是不是这个号码？", "flow": "personnel", "field": "victim_contact", "key_item": false}
+      ]
+    },
+    {
+      "key": "process",
+      "title": "被骗经过",
+      "questions": [
+        {"qid": "T18-S3-Q01", "text": "对方让你下载什么贷款软件或者培训APP？名称、图标是什么？", "flow": "network", "field": "app_name", "key_item": true},
+        {"qid": "T18-S3-Q02", "text": "对方发给你的借款平台网址或者注销页面链接是什么？完整域名是什么？", "flow": "network", "field": "url_domain", "key_item": true},
+        {"qid": "T18-S3-Q03", "text": "对方有没有发二维码让你扫码注册或者扫码还款？二维码从哪里来的？", "flow": "network", "field": "qr_code", "key_item": true},
+        {"qid": "T18-S3-Q04", "text": "对方是否要求你开启屏幕共享或者远程协助，指导你在平台借款？", "flow": "network", "field": "screen_share", "key_item": false},
+        {"qid": "T18-S3-Q05", "text": "除了最初的联系人，还有招生老师、班主任或者客服跟你对接吗？", "flow": "personnel", "field": "agent_person", "key_item": false},
+        {"qid": "T18-S3-Q06", "text": "对方让你在哪些平台借了款？各借了多少、钱到账后转给谁了？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S3-Q07", "text": "对方让你签了哪些合同或者协议？是电子合同还是纸质合同？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S3-Q08", "text": "你操作借款时用的是什么型号的手机？App里有没有风险提示？", "flow": "network", "field": "login_ip", "key_item": false}
+      ]
+    },
+    {
+      "key": "loss",
+      "title": "资金损失",
+      "questions": [
+        {"qid": "T18-S4-Q01", "text": "你第一笔钱转出去是什么时间？具体日期和时刻是什么？", "flow": "fund", "field": "transfer_time", "key_item": true},
+        {"qid": "T18-S4-Q02", "text": "你一共转出多少钱？其中借款多少、自己存款多少？", "flow": "fund", "field": "transfer_amount", "key_item": true},
+        {"qid": "T18-S4-Q03", "text": "资金是通过手机银行、微信还是支付宝转出的？有没有用他人账户？", "flow": "fund", "field": "pay_channel", "key_item": false},
+        {"qid": "T18-S4-Q04", "text": "钱是从哪张银行卡转出的？开户银行和卡号后四位是什么？", "flow": "fund", "field": "payer_card", "key_item": false},
+        {"qid": "T18-S4-Q05", "text": "对方收款账户是哪家银行的？开户支行名称是什么？", "flow": "fund", "field": "counterparty_bank", "key_item": false},
+        {"qid": "T18-S4-Q06", "text": "对方收款账户的卡号或者账号是多少？平台显示的收款方是什么？", "flow": "fund", "field": "counterparty_card", "key_item": true},
+        {"qid": "T18-S4-Q07", "text": "收款账户的开户人姓名是什么？和培训机构、平台名称是否一致？", "flow": "fund", "field": "counterparty_name", "key_item": true},
+        {"qid": "T18-S4-Q08", "text": "你最终确认的损失总额是多少？现在每月需要还多少贷款？", "flow": "fund", "field": "total_loss", "key_item": true}
+      ]
+    },
+    {
+      "key": "evidence",
+      "title": "证据补充",
+      "questions": [
+        {"qid": "T18-S5-Q01", "text": "你和对方的聊天记录、借款截图和电子合同是否保存？能否提供？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S5-Q02", "text": "借款平台的放款记录和还款计划能否截图？实际到账了多少钱？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S5-Q03", "text": "你的银行卡流水是否已经打印？能否提供银行盖章的交易明细？", "flow": null, "field": null, "key_item": false},
+        {"qid": "T18-S5-Q04", "text": "你有没有向学校老师或者家人反映？是否已经向公安机关报案？", "flow": null, "field": null, "key_item": false}
+      ]
+    }
+  ]
+}
